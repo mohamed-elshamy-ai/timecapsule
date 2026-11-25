@@ -43,6 +43,18 @@ $ timecapsule around presentation --hours 3
 
 Already excluded by default: `.git`, `node_modules`, `__pycache__`, virtual envs, temp files, `.ssh`, `.env`, key files, and any name containing `password` or `secret`. Add more with `exclude`.
 
+## Install on Windows, macOS and Linux
+
+Needs Python 3.9 or newer. On Windows install it from python.org and tick "Add python.exe to PATH".
+
+```bash
+# Windows (PowerShell):  py -m pip install git+https://github.com/mohamed-elshamy-ai/timecapsule
+# macOS:                 python3 -m pip install git+https://github.com/mohamed-elshamy-ai/timecapsule
+# Linux:                 python3 -m pip install --user git+https://github.com/mohamed-elshamy-ai/timecapsule
+```
+
+Tested on Linux only (verified `pip install` from GitHub in a clean environment). Android and browser: not available, a website cannot watch your folders. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://mohamed-elshamy-ai.github.io/timecapsule/
+
 ## How it works
 
 1. **You choose** which folders to track. A first scan only takes a snapshot.

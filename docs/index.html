@@ -2,45 +2,60 @@
 <title>TimeCapsule: What was I working on? A private, searchable timeline of your files.</title><meta name="description" content="An opt-in, local-only timeline of the files you create and edit, searchable by day, name and topic.">
 <meta property="og:title" content="TimeCapsule"><meta property="og:description" content="An opt-in, local-only timeline of the files you create and edit, searchable by day, name and topic.">
 <style>
-:root{--bg:#0f1420;--card:#171e2e;--fg:#e8ecf4;--mut:#9aa6bd;--acc:#5b9dff;--acc2:#7ee0b5}
-*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px}
-header.hero{padding:72px 0 40px;text-align:center;background:radial-gradient(900px 300px at 50% -50px,#24407a55,transparent)}
-h1{font-size:3rem;margin:0 0 8px;letter-spacing:-1px}.tag{color:var(--mut);font-size:1.25rem;margin:0 auto 28px;max-width:640px}
-.btn{display:inline-block;padding:11px 22px;border-radius:9px;background:var(--acc);color:#04122b;font-weight:600;text-decoration:none;margin:4px}
-.btn.alt{background:transparent;color:var(--fg);border:1px solid #34405c}
-section{padding:28px 0}h2{font-size:1.5rem;margin:0 0 14px}
-.card{background:var(--card);border-radius:12px;padding:18px 22px;margin:12px 0}
-pre{background:#0a0e17;border:1px solid #232c44;border-radius:10px;padding:16px;overflow:auto;font-size:.88rem;line-height:1.5}
-code{font-family:ui-monospace,Menlo,Consolas,monospace}
-ul{padding-left:1.2rem}li{margin:6px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.mut{color:var(--mut)}.rtl{direction:rtl;text-align:right}img{max-width:100%;border-radius:10px;border:1px solid #232c44}
-footer{padding:40px 0 60px;color:var(--mut);text-align:center;font-size:.9rem}.warn{border-left:4px solid #d68910}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.65 var(--body);background:var(--bg);color:var(--fg)}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+a{color:var(--acc)}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace}
+pre{background:var(--code);color:var(--codefg);border:1px solid var(--line);border-radius:var(--r);padding:16px;overflow:auto;font-size:.86rem;line-height:1.5}
+.btn{display:inline-block;padding:11px 22px;border-radius:var(--r);background:var(--acc);color:var(--accfg);font-weight:600;text-decoration:none;margin:4px 8px 4px 0}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+section{padding:26px 0}h2{font-family:var(--head);font-size:1.5rem;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.grid .card{margin:0}
+.mut{color:var(--mut)}.rtl{direction:rtl;text-align:right}
+img.shot{max-width:100%;border-radius:var(--r);border:1px solid var(--line);margin:8px 0}
+.warn{border-left:5px solid var(--warn)}
+.os{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.os h3{margin:0 0 6px;font-size:1rem}.os pre{margin:6px 0}
+footer{padding:44px 0 60px;color:var(--mut);text-align:center;font-size:.9rem}
+footer img{border-radius:50%;border:2px solid var(--line);display:block;margin:0 auto 10px}
+.badge{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin-left:6px;vertical-align:middle}
+.ok{color:#2e9e5b}.no{color:#c0392b}
+
+:root{--bg:#120d24;--fg:#ece8ff;--mut:#a79fd0;--card:#1c1536;--line:#34295c;--acc:#b794ff;--accfg:#150d2e;--code:#0c0818;--codefg:#d8ccff;--warn:#f0b35a;--r:16px;--body:system-ui,-apple-system,Segoe UI,sans-serif;--head:system-ui,sans-serif}
+header.hero{padding:80px 0 44px;text-align:center;background:radial-gradient(700px 320px at 50% 0,#4a2f9a66,transparent)}
+h1{font-size:3.2rem;margin:0 0 6px;background:linear-gradient(90deg,#b794ff,#6ee7ff);-webkit-background-clip:text;background-clip:text;color:transparent}.tag{font-size:1.2rem;color:var(--mut);max-width:620px;margin:0 auto 22px}
+main section h2{border-left:4px solid var(--acc);padding-left:12px}
 </style></head><body>
 <header class="hero"><div class="wrap"><h1>TimeCapsule</h1><p class="tag">What was I working on? A private, searchable timeline of your files.</p>
 <a class="btn" href="https://github.com/mohamed-elshamy-ai/timecapsule">View on GitHub</a><a class="btn alt" href="#install">Install</a>
-<p class="mut" style="margin-top:18px">Open source &middot; MIT license &middot; runs on your machine</p></div></header>
+<p class="mut" style="margin-top:16px">Open source &middot; MIT license &middot; early release v0.1.0</p></div></header>
 <main class="wrap">
 <section><h2>What it does</h2><p>TimeCapsule records which files you created, edited or deleted in folders you choose, then answers questions like what you worked on on a given day, when you last touched a file, or what else you worked on around the time of a presentation. Nothing is recorded until you add a folder, and file contents are never stored.</p></section>
 <section><div class="grid"><div class="card"><b>Opt-in</b><div class="mut">Nothing is recorded until you add a folder.</div></div><div class="card"><b>No contents stored</b><div class="mut">Only names, paths, sizes and times.</div></div><div class="card"><b>You control it</b><div class="mut">Pause, exclude patterns, delete by date or path.</div></div><div class="card"><b>One local file</b><div class="mut">SQLite on your machine. No cloud, no AI.</div></div></div></section>
-<section><h2>Example</h2><pre><code>
-OCTOBER 12
+<section><h2>Examples</h2><h3>Real output from the demo files in the repo</h3><pre><code>OCTOBER 12
   10:30 AM  Created Graduation_Project.pdf   (/tmp/tcwork)
   11:15 AM  Created architecture.py   (/tmp/tcwork)
   12:00 PM  Created meeting_notes.docx   (/tmp/tcwork)
-  02:00 PM  Created project_presentation.pptx   (/tmp/tcwork)
+  02:00 PM  Created project_presentation.pptx   (/tmp/tcwork)</code></pre></section>
 
-</code></pre></section>
-
-<section id="install"><h2>Install</h2><pre><code>git clone https://github.com/mohamed-elshamy-ai/timecapsule
-cd timecapsule
-pip install -e .
+<section id="install"><h2>Install</h2><div class="os">
+<div class="card"><h3>Windows</h3><div class="mut">Install Python 3.9+ from python.org (tick "Add python.exe to PATH"), then in PowerShell:</div>
+<pre><code>py -m pip install git+https://github.com/mohamed-elshamy-ai/timecapsule
+timecapsule add $HOME\Projects
+timecapsule watch</code></pre><div><span class="mut"><b>Untested.</b></span> Should work (Python standard library only). Only tested on Linux.</div></div>
+<div class="card"><h3>macOS</h3><div class="mut">Python 3.9+ (<code>brew install python</code> or python.org), then in Terminal:</div>
+<pre><code>python3 -m pip install git+https://github.com/mohamed-elshamy-ai/timecapsule
 timecapsule add ~/Projects
-timecapsule watch
-timecapsule day 2026-10-12</code></pre></section>
+timecapsule watch</code></pre><div><span class="mut"><b>Untested.</b></span> Should work. Only tested on Linux.</div></div>
+<div class="card"><h3>Linux</h3><div class="mut">Python 3.9+ is usually installed. In a terminal:</div>
+<pre><code>python3 -m pip install --user git+https://github.com/mohamed-elshamy-ai/timecapsule
+timecapsule add ~/Projects
+timecapsule watch</code></pre><div><span class="ok"><b>Tested.</b></span> Tested on Linux (Python 3.10).</div></div>
+<div class="card"><h3>Android</h3><div><span class="no"><b>Not available.</b></span> Not available. Android apps cannot watch other apps&#x27; folders this way, and a website cannot read your folders, so there is no browser demo either.</div></div>
+</div></section>
 <section><h2>How it works</h2><ol><li>You pick the folders. The first scan is only a snapshot.</li><li>Every few seconds the folders are scanned and each new, changed or removed file becomes an event.</li><li>Events are stored in a local SQLite file.</li><li>Ask by day, by file name, or with &#x27;around&#x27; to see what else you touched in the same hours.</li><li>Pause, exclude or delete history at any time.</li></ol>
 <div class="card rtl"><b>الشرح بالعربي</b><p>بتختار الفولدرات اللي عايز تتابعها، ومفيش حاجة بتتسجل قبل كده. الأداة بتراقب الفولدر وتسجل أي ملف اتعمل أو اتعدل أو اتمسح (الاسم والمكان والحجم والوقت بس، مش المحتوى) في قاعدة بيانات على جهازك. بعدين تسألها عملت إيه يوم معين، أو آخر مرة عدلت ملف إمتى، أو كنت شغال على إيه وقت ما جهزت العرض. وتقدر توقفها أو تمسح السجل في أي وقت.</p></div></section>
-<section><h2>Limits</h2><div class="card warn"><ul><li>It sees file changes only. It does not know when you open a file, visit a website or use an app.</li><li>Search is by file name and time. No search inside contents and no meaning-based search yet.</li><li>Polling, not OS file events, so large folders cost some CPU.</li><li>No browser extension or window app yet.</li></ul></div></section>
+<section><h2>Honest limits</h2><div class="card warn"><ul><li>It sees file changes only. It does not know when you open a file, visit a website or use an app.</li><li>Search is by file name and time. No search inside contents and no meaning-based search yet.</li><li>Polling, not OS file events, so large folders cost some CPU.</li><li>No browser extension or window app yet.</li></ul></div></section>
 </main>
-<footer><img src="author.jpg" alt="Mohamed Elshamy" width="64" height="64" style="border-radius:50%;border:2px solid #34405c;display:block;margin:0 auto 10px"> Built by <a style="color:var(--acc)" href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Early release (v0.1.0). Issues and pull requests are welcome on <a style="color:var(--acc)" href="https://github.com/mohamed-elshamy-ai/timecapsule">GitHub</a>.</footer>
+<footer><img src="author.jpg" alt="Mohamed Elshamy" width="64" height="64">Built by <a href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Issues and pull requests are welcome on <a href="https://github.com/mohamed-elshamy-ai/timecapsule">GitHub</a>.</footer>
 </body></html>
