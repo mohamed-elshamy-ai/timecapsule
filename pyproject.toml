@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "timecapsule"
+version = "0.1.0"
+description = "An opt-in, local-only timeline of the files you work on, searchable by time and topic."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+timecapsule = "timecapsule.cli:main"
+
+[tool.setuptools]
+packages = ["timecapsule"]

@@ -1,0 +1,24 @@
+$ timecapsule add ~/Projects   # nothing is recorded before this
+$ timecapsule day 2026-10-12
+
+OCTOBER 12
+  10:30 AM  Created Graduation_Project.pdf   (/tmp/tcwork)
+  11:15 AM  Created architecture.py   (/tmp/tcwork)
+  12:00 PM  Created meeting_notes.docx   (/tmp/tcwork)
+  02:00 PM  Created project_presentation.pptx   (/tmp/tcwork)
+
+$ timecapsule last architecture
+2026-10-12 11:15  Created  /tmp/tcwork/architecture.py
+
+$ timecapsule around presentation --hours 3
+
+== Around 2026-10-12 14:00 ==
+  11:15 AM  Created architecture.py
+  12:00 PM  Created meeting_notes.docx
+  02:00 PM  Created project_presentation.pptx
+
+$ timecapsule status
+Recording: on
+Events stored: 4
+Folders: /tmp/tcwork
+Database: ~/.timecapsule/capsule.db
