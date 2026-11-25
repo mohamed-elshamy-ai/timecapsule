@@ -88,3 +88,8 @@ OS file-event backend, browser extension (opt-in), semantic search, a window app
 ## License
 
 MIT
+
+## Similar tools (honest comparison)
+
+[OpenRecall](https://github.com/openrecall/openrecall/) (screenshots and OCR) and Windows Recall do a broader version of this. TimeCapsule is much smaller on purpose: opt-in, only file activity (no screenshots), local, standard library only. It sees less, and is therefore less invasive.
+
