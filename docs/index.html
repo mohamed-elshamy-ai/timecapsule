@@ -9,6 +9,7 @@ a{color:var(--acc)}code,pre{font-family:ui-monospace,Menlo,Consolas,monospace}
 pre{background:var(--code);color:var(--codefg);border:1px solid var(--line);border-radius:var(--r);padding:16px;overflow:auto;font-size:.86rem;line-height:1.5}
 .btn{display:inline-block;padding:11px 22px;border-radius:var(--r);background:var(--acc);color:var(--accfg);font-weight:600;text-decoration:none;margin:4px 8px 4px 0}
 .btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
 section{padding:26px 0}h2{font-family:var(--head);font-size:1.5rem;margin:0 0 14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.grid .card{margin:0}
@@ -30,8 +31,9 @@ main section h2{border-left:4px solid var(--acc);padding-left:12px}
 <a class="btn" href="https://github.com/mohamed-elshamy-ai/timecapsule">View on GitHub</a><a class="btn alt" href="#install">Install</a>
 <p class="mut" style="margin-top:16px">Open source &middot; MIT license &middot; early release v0.1.0</p></div></header>
 <main class="wrap">
-<section><h2>What it does</h2><p>TimeCapsule records which files you created, edited or deleted in folders you choose, then answers questions like what you worked on on a given day, when you last touched a file, or what else you worked on around the time of a presentation. Nothing is recorded until you add a folder, and file contents are never stored.</p></section>
 <section><div class="grid"><div class="card"><b>Opt-in</b><div class="mut">Nothing is recorded until you add a folder.</div></div><div class="card"><b>No contents stored</b><div class="mut">Only names, paths, sizes and times.</div></div><div class="card"><b>You control it</b><div class="mut">Pause, exclude patterns, delete by date or path.</div></div><div class="card"><b>One local file</b><div class="mut">SQLite on your machine. No cloud, no AI.</div></div></div></section>
+<section><h2>What it does</h2><p>TimeCapsule records which files you created, edited or deleted in folders you choose, then answers questions like what you worked on on a given day, when you last touched a file, or what else you worked on around the time of a presentation. Nothing is recorded until you add a folder, and file contents are never stored.</p></section>
+
 <section><h2>Examples</h2><h3>Real output from the demo files in the repo</h3><pre><code>OCTOBER 12
   10:30 AM  Created Graduation_Project.pdf   (/tmp/tcwork)
   11:15 AM  Created architecture.py   (/tmp/tcwork)
@@ -54,7 +56,7 @@ timecapsule watch</code></pre><div><span class="ok"><b>Tested.</b></span> Tested
 <div class="card"><h3>Android</h3><div><span class="no"><b>Not available.</b></span> Not available. Android apps cannot watch other apps&#x27; folders this way, and a website cannot read your folders, so there is no browser demo either.</div></div>
 </div></section>
 <section><h2>How it works</h2><ol><li>You pick the folders. The first scan is only a snapshot.</li><li>Every few seconds the folders are scanned and each new, changed or removed file becomes an event.</li><li>Events are stored in a local SQLite file.</li><li>Ask by day, by file name, or with &#x27;around&#x27; to see what else you touched in the same hours.</li><li>Pause, exclude or delete history at any time.</li></ol>
-<div class="card rtl"><b>الشرح بالعربي</b><p>بتختار الفولدرات اللي عايز تتابعها، ومفيش حاجة بتتسجل قبل كده. الأداة بتراقب الفولدر وتسجل أي ملف اتعمل أو اتعدل أو اتمسح (الاسم والمكان والحجم والوقت بس، مش المحتوى) في قاعدة بيانات على جهازك. بعدين تسألها عملت إيه يوم معين، أو آخر مرة عدلت ملف إمتى، أو كنت شغال على إيه وقت ما جهزت العرض. وتقدر توقفها أو تمسح السجل في أي وقت.</p></div></section>
+<div class="card" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتختار الفولدرات اللي عايز تتابعها، ومفيش حاجة بتتسجل قبل كده. الأداة بتراقب الفولدر وتسجل أي ملف اتعمل أو اتعدل أو اتمسح (الاسم والمكان والحجم والوقت بس، مش المحتوى) في قاعدة بيانات على جهازك. بعدين تسألها عملت إيه يوم معين، أو آخر مرة عدلت ملف إمتى، أو كنت شغال على إيه وقت ما جهزت العرض. وتقدر توقفها أو تمسح السجل في أي وقت.</p></div></section>
 <section><h2>Honest limits</h2><div class="card warn"><ul><li>It sees file changes only. It does not know when you open a file, visit a website or use an app.</li><li>Search is by file name and time. No search inside contents and no meaning-based search yet.</li><li>Polling, not OS file events, so large folders cost some CPU.</li><li>No browser extension or window app yet.</li></ul></div></section>
 </main>
 <footer><img src="author.jpg" alt="Mohamed Elshamy" width="64" height="64">Built by <a href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Issues and pull requests are welcome on <a href="https://github.com/mohamed-elshamy-ai/timecapsule">GitHub</a>.</footer>
