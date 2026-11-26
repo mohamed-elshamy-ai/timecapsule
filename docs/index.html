@@ -41,6 +41,11 @@ main section h2{border-left:4px solid var(--acc);padding-left:12px}
 .card{transition:border-color .25s var(--ease-out),transform .25s var(--ease-out)}
 .card:hover{border-color:var(--acc);transform:translateY(-2px)}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* language toggle */
+.langtoggle{display:inline-flex;gap:4px;margin:0 0 14px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px}
+.langtoggle button{border:0;background:transparent;color:var(--mut);font:inherit;font-weight:600;min-height:44px;padding:8px 20px;border-radius:99px;cursor:pointer;transition:background .2s var(--ease-out),color .2s var(--ease-out)}
+.langtoggle button[aria-pressed="true"]{background:var(--acc);color:var(--accfg)}
 </style></head><body>
 <header class="hero"><div class="wrap"><h1>TimeCapsule</h1><p class="tag">What was I working on? A private, searchable timeline of your files.</p>
 <a class="btn" href="https://github.com/mohamed-elshamy-ai/timecapsule">View on GitHub</a><a class="btn alt" href="#install">Install</a>
@@ -70,9 +75,24 @@ timecapsule add ~/Projects
 timecapsule watch</code></pre><div><span class="ok"><b>Tested.</b></span> Tested on Linux (Python 3.10).</div></div>
 <div class="card"><h3>Android</h3><div><span class="no"><b>Not available.</b></span> Not available. Android apps cannot watch other apps&#x27; folders this way, and a website cannot read your folders, so there is no browser demo either.</div></div>
 </div></section>
-<section><h2>How it works</h2><ol><li>You pick the folders. The first scan is only a snapshot.</li><li>Every few seconds the folders are scanned and each new, changed or removed file becomes an event.</li><li>Events are stored in a local SQLite file.</li><li>Ask by day, by file name, or with &#x27;around&#x27; to see what else you touched in the same hours.</li><li>Pause, exclude or delete history at any time.</li></ol>
-<div class="card" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتختار الفولدرات اللي عايز تتابعها، ومفيش حاجة بتتسجل قبل كده. الأداة بتراقب الفولدر وتسجل أي ملف اتعمل أو اتعدل أو اتمسح (الاسم والمكان والحجم والوقت بس، مش المحتوى) في قاعدة بيانات على جهازك. بعدين تسألها عملت إيه يوم معين، أو آخر مرة عدلت ملف إمتى، أو كنت شغال على إيه وقت ما جهزت العرض. وتقدر توقفها أو تمسح السجل في أي وقت.</p></div></section>
+<section class="how-section"><h2><span class="lang-en">How it works</span><span class="lang-ar" hidden>إزاي بيشتغل</span></h2><div class="langtoggle" role="group" aria-label="Language / اللغة"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div><div class="lang-en"><ol><li>You pick the folders. The first scan is only a snapshot.</li><li>Every few seconds the folders are scanned and each new, changed or removed file becomes an event.</li><li>Events are stored in a local SQLite file.</li><li>Ask by day, by file name, or with &#x27;around&#x27; to see what else you touched in the same hours.</li><li>Pause, exclude or delete history at any time.</li></ol>
+</div><div class="card lang-ar" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتختار الفولدرات اللي عايز تتابعها، ومفيش حاجة بتتسجل قبل كده. الأداة بتراقب الفولدر وتسجل أي ملف اتعمل أو اتعدل أو اتمسح (الاسم والمكان والحجم والوقت بس، مش المحتوى) في قاعدة بيانات على جهازك. بعدين تسألها عملت إيه يوم معين، أو آخر مرة عدلت ملف إمتى، أو كنت شغال على إيه وقت ما جهزت العرض. وتقدر توقفها أو تمسح السجل في أي وقت.</p></div></section>
 <section><h2>Honest limits</h2><div class="card warn"><ul><li>It sees file changes only. It does not know when you open a file, visit a website or use an app.</li><li>Search is by file name and time. No search inside contents and no meaning-based search yet.</li><li>Polling, not OS file events, so large folders cost some CPU.</li><li>No browser extension or window app yet.</li></ul></div></section>
 </main>
 <footer>Built by <a href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Issues and pull requests are welcome on <a href="https://github.com/mohamed-elshamy-ai/timecapsule">GitHub</a>.</footer>
-</body></html>
+<script>
+(function(){
+ var KEY='site-lang';
+ function apply(lang){
+  document.querySelectorAll('.lang-en').forEach(function(e){e.hidden=lang!=='en'});
+  document.querySelectorAll('.lang-ar').forEach(function(e){e.hidden=lang!=='ar'});
+  document.querySelectorAll('.langtoggle button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false')});
+  document.querySelectorAll('.how-section').forEach(function(s){s.dir=lang==='ar'?'rtl':'ltr'});
+  try{localStorage.setItem(KEY,lang)}catch(e){}
+ }
+ var def=(navigator.language||'en').toLowerCase().indexOf('ar')===0?'ar':'en';
+ var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
+ apply(saved||def);
+ document.querySelectorAll('.langtoggle button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+})();
+</script></body></html>
