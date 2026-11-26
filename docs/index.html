@@ -24,7 +24,7 @@ footer img{border-radius:50%;border:2px solid var(--line);display:block;margin:0
 .badge{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin-left:6px;vertical-align:middle}
 .ok{color:#2e9e5b}.no{color:#c0392b}
 
-:root{--bg:#120d24;--fg:#ece8ff;--mut:#a79fd0;--card:#1c1536;--line:#34295c;--acc:#b794ff;--accfg:#150d2e;--code:#0c0818;--codefg:#d8ccff;--warn:#f0b35a;--arabic:'Readex Pro',sans-serif;--r:16px;--body:'Public Sans','Readex Pro',system-ui,sans-serif;--head:'Unbounded','Readex Pro',system-ui,sans-serif}
+:root{--bg:#eef3f8;--fg:#101a2e;--mut:#45577a;--card:#ffffff;--line:#cbd8e8;--acc:#1d4ed8;--accfg:#ffffff;--code:#101a2e;--codefg:#dbe7ff;--warn:#b45309;--arabic:'Readex Pro',sans-serif;--r:16px;--body:'Public Sans','Readex Pro',system-ui,sans-serif;--head:'Unbounded','Readex Pro',system-ui,sans-serif}
 header.hero{padding:80px 0 44px;text-align:center;background:radial-gradient(700px 320px at 50% 0,#4a2f9a66,transparent)}
 h1{font-family:var(--head);font-size:clamp(2.1rem,8.5vw,3.2rem);overflow-wrap:break-word;margin:0 0 6px;background:linear-gradient(90deg,#b794ff,#6ee7ff);-webkit-background-clip:text;background-clip:text;color:transparent}.tag{font-size:1.2rem;color:var(--mut);max-width:620px;margin:0 auto 22px}
 main section h2{border-left:4px solid var(--acc);padding-left:12px}
@@ -54,13 +54,41 @@ footer a{display:inline-block;padding:14px 4px;min-height:44px;box-sizing:border
 pre,code,.err,.q,.finder,.results,.redcard,.scan,.stack,.proof,.os pre{direction:ltr;text-align:left;unicode-bidi:isolate}
 pre,code,.err,.q{font-family:ui-monospace,Menlo,Consolas,monospace}
 html[dir=rtl] .q{font-family:var(--body)}
-.ok b{color:#4fd18b}.no b{color:#ff8f7e}
+.ok b{color:#17703f}.no b{color:#a8281b}
 html[dir=rtl] #install,html[dir=rtl] #install .card{direction:ltr;text-align:left}
 html[dir=rtl] *{letter-spacing:0!important;text-transform:none!important}
+
+/* redesign: timeline ruler */
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
+.hero .wrap{text-align:start}
+header.hero{padding:58px 0 54px;background:repeating-linear-gradient(0deg,transparent 0 31px,#dde6f1 31px 32px),var(--bg);border-bottom:2px solid var(--fg)}
+.hero .wrap{max-width:1000px;display:grid;grid-template-columns:1fr 1.05fr;gap:46px;align-items:center}
+.hero h1{font-family:var(--head);font-weight:800;font-size:clamp(2rem,6.4vw,3.3rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 14px;color:var(--fg);background:none!important;-webkit-text-fill-color:var(--fg)!important;overflow-wrap:anywhere}
+.hero h1:after{content:none}
+.hero .tag{font-size:1.25rem;line-height:1.45;margin:0 0 22px;color:var(--fg);max-inline-size:25rem}
+.btn{border-radius:6px;min-block-size:44px;display:inline-flex;align-items:center}
+.tl{background:#fff;border:2px solid var(--fg);border-radius:6px;padding:14px 16px 10px;box-shadow:6px 6px 0 var(--acc);direction:ltr;text-align:left}
+.tl .day{font:800 .78rem var(--head);letter-spacing:.14em;margin:0 0 8px}
+.ev{position:relative;display:grid;grid-template-columns:78px 1fr;gap:12px;padding:9px 8px 9px 22px;font:500 .84rem/1.35 var(--body);border-radius:4px;animation:scan 8s steps(1) infinite}
+.ev:before{content:"";position:absolute;inset-inline-start:6px;inset-block:0;border-inline-start:2px solid var(--line)}
+.ev:after{content:"";position:absolute;inset-inline-start:2px;inset-block-start:15px;inline-size:10px;block-size:10px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
+.ev time{font:600 .74rem ui-monospace,Menlo,monospace;color:var(--mut)}
+.ev b{font-weight:700}.ev em{font-style:normal;color:var(--mut)}
+.ev small{display:block;color:var(--mut);font:500 .72rem ui-monospace,Menlo,monospace}
+.ev:nth-child(2){animation-delay:0s}.ev:nth-child(3){animation-delay:2s}.ev:nth-child(4){animation-delay:4s}.ev:nth-child(5){animation-delay:6s}
+@keyframes scan{0%{background:#e8efff}25%,100%{background:transparent}}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr;gap:30px}.tl{box-shadow:4px 4px 0 var(--acc)}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+header.hero .wrap{text-align:start!important}
 </style></head><body>
-<header class="hero"><div class="wrap"><h1 data-ar="TimeCapsule">TimeCapsule</h1><p class="tag" data-ar="كنت شغّال على إيه؟ خط زمني خاص ويتدوَّر فيه لملفاتك.">What was I working on? A private, searchable timeline of your files.</p>
+<header class="hero"><div class="wrap"><div><h1 data-ar="TimeCapsule">TimeCapsule</h1><p class="tag" data-ar="كنت شغّال على إيه؟ خط زمني خاص ويتدوَّر فيه لملفاتك.">What was I working on? A private, searchable timeline of your files.</p>
 <a class="btn" data-ar="شوف الكود على GitHub" href="https://github.com/mohamed-elshamy-ai/timecapsule">View on GitHub</a><a class="btn alt" data-ar="التثبيت" href="#install">Install</a>
-<p class="mut" data-ar="مفتوحة المصدر · رخصة MIT · إصدار تجريبي v0.1.0" style="margin-top:16px">Open source · MIT license · early release v0.1.0</p></div></header>
+<p class="mut" data-ar="مفتوحة المصدر · رخصة MIT · إصدار تجريبي v0.1.0" style="margin-top:16px">Open source · MIT license · early release v0.1.0</p></div>
+<div aria-label="Example timeline for October 12: four files created" class="tl" role="img"><p class="day">OCTOBER 12 · DEMO FILES</p>
+<div class="ev"><time>10:30 AM</time><div><em>Created</em> <b>Graduation_Project.pdf</b></div></div>
+<div class="ev"><time>11:15 AM</time><div><em>Created</em> <b>architecture.py</b></div></div>
+<div class="ev"><time>12:00 PM</time><div><em>Created</em> <b>meeting_notes.docx</b></div></div>
+<div class="ev"><time>02:00 PM</time><div><em>Created</em> <b>project_presentation.pptx</b><small>names, paths, sizes and times only</small></div></div></div></div></header>
 <main class="wrap">
 <section><div class="grid"><div class="card"><b data-ar="بإذنك بس">Opt-in</b><div class="mut" data-ar="مفيش حاجة بتتسجل غير لما تضيف فولدر.">Nothing is recorded until you add a folder.</div></div><div class="card"><b data-ar="محتوى الملفات مش بيتخزّن">No contents stored</b><div class="mut" data-ar="الأسماء والمسارات والأحجام والأوقات بس.">Only names, paths, sizes and times.</div></div><div class="card"><b data-ar="إنت اللي متحكّم">You control it</b><div class="mut" data-ar="إيقاف مؤقت واستثناء أنماط وحذف بالتاريخ أو المسار.">Pause, exclude patterns, delete by date or path.</div></div><div class="card"><b data-ar="ملف واحد على جهازك">One local file</b><div class="mut" data-ar="SQLite على جهازك. من غير سحابة ومن غير ذكاء اصطناعي.">SQLite on your machine. No cloud, no AI.</div></div></div></section>
 <section><h2 data-ar="بتعمل إيه">What it does</h2><p data-ar="TimeCapsule">TimeCapsule records which files you created, edited or deleted in folders you choose, then answers questions like what you worked on on a given day, when you last touched a file, or what else you worked on around the time of a presentation. Nothing is recorded until you add a folder, and file contents are never stored.</p></section>
