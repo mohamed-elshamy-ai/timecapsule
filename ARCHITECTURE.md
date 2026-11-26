@@ -1,6 +1,4 @@
-# TimeCapsule: technical notes / الشرح التقني
-
-## English
+# TimeCapsule: technical notes
 
 **Modules**: `store.py` has the `Capsule` class (SQLite store, polling scanner, queries, deletion). `cli.py` is the command line. There are no third-party dependencies.
 
@@ -21,15 +19,3 @@
 **Testing** (9 tests): nothing recorded before a folder is added, first scan snapshot, created/modified/deleted, default and custom excludes, pause, day/last/around on a built timeline, forget, contents never stored, CLI behaviour.
 
 **Limits**: sees file changes only (no "opened", no web history, no app usage), name and time search only, polling.
-
-## بالعربي
-
-**الأجزاء**: `store.py` فيه كلاس `Capsule` (قاعدة SQLite، ماسح بالمراقبة الدورية، الاستعلامات، الحذف). `cli.py` سطر الأوامر. من غير مكتبات خارجية.
-
-**البيانات**: جداول الفولدرات المختارة والاستثناءات وآخر حالة لكل ملف والأحداث (وقت، نوع، مسار، حجم). محتوى الملفات ما بيتقراش ولا بيتخزن، وفيه اختبار بيتأكد من كده.
-
-**الخوارزمية**: بيمشي على الفولدرات ويقارن كل ملف بآخر حالة: جديد = created، اتغير وقته أو حجمه = modified، اختفى = deleted. أول مسح للفولدر بياخد لقطة بس. أمر `around` بيدور على ملفات اسمها فيه الكلمة، بيجمعها في نوافذ زمنية، وبيعرض كل اللي اتلمس في نفس الوقت.
-
-**قرارات التصميم**: اختياري وبيانات وصفية بس لأن سجل النشاط حساس، وأسماء زي password وsecret و`.env` و`.ssh` مستثناة تلقائياً. المراقبة الدورية بمكتبة بايثون القياسية عشان تشتغل على أي نظام.
-
-**الاختبار**: ٩ اختبارات. **الحدود**: بيشوف تغييرات الملفات بس، مش "فتح الملف" ولا المواقع ولا التطبيقات، والبحث بالاسم والوقت بس.

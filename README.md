@@ -65,11 +65,7 @@ Tested on Linux only (verified `pip install` from GitHub in a clean environment)
 4. **Ask**: by day, by file name, or `around`, which finds files matching a word and then lists everything else touched within a few hours of them.
 5. **Control**: pause, exclude patterns, and delete history by date, by path, or all of it.
 
-### الشرح بالعربي
-
-الأداة بتعمل خط زمني خاص بالملفات اللي بتشتغل عليها، لكن بس في الفولدرات اللي انت تختارها، ومفيش حاجة بتتسجل قبل ما تضيف فولدر. بتسجل اسم الملف ومكانه وحجمه ووقته بس، **مش محتواه**، وكله في ملف قاعدة بيانات على جهازك. بتراقب الفولدر كل كام ثانية وتسجل أي ملف اتعمل أو اتعدل أو اتمسح. بعدين تسألها: "عملت إيه يوم ١٢ أكتوبر؟" أو "آخر مرة عدلت فيها الملف ده إمتى؟" أو "كنت شغال على إيه وقت ما جهزت العرض؟" (`around`). وتقدر توقفها أو تستثني ملفات أو تمسح السجل كله.
-
-## Limits (read these)
+## Limitations
 
 - It sees **file changes only**. It does **not** know when you merely open or read a file, which websites you visited, or which apps you used. "Opened X" entries like in the idea sketch are not recorded.
 - Edit times come from the file's modified time, so the timeline is as accurate as the scan interval and your system clock. Files changed and changed back between scans leave one event or none.
@@ -83,7 +79,7 @@ Tested on Linux only (verified `pip install` from GitHub in a clean environment)
 pip install -e ".[dev]" && pytest
 ```
 
-## Roadmap (not built)
+## Roadmap (not yet built)
 
 OS file-event backend, browser extension (opt-in), semantic search, a window app.
 
@@ -91,7 +87,6 @@ OS file-event backend, browser extension (opt-in), semantic search, a window app
 
 MIT
 
-## Similar tools (honest comparison)
+## Related tools
 
 [OpenRecall](https://github.com/openrecall/openrecall/) (screenshots and OCR) and Windows Recall do a broader version of this. TimeCapsule is much smaller on purpose: opt-in, only file activity (no screenshots), local, standard library only. It sees less, and is therefore less invasive.
-
