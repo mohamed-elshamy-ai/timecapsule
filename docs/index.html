@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Public+Sans:wght@400;500;700&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TimeCapsule: What was I working on? A private, searchable timeline of your files.</title><meta name="description" content="An opt-in, local-only timeline of the files you create and edit, searchable by day, name and topic.">
 <meta property="og:title" content="TimeCapsule"><meta property="og:description" content="An opt-in, local-only timeline of the files you create and edit, searchable by day, name and topic.">
 <style>
@@ -22,10 +22,25 @@ footer img{border-radius:50%;border:2px solid var(--line);display:block;margin:0
 .badge{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin-left:6px;vertical-align:middle}
 .ok{color:#2e9e5b}.no{color:#c0392b}
 
-:root{--bg:#120d24;--fg:#ece8ff;--mut:#a79fd0;--card:#1c1536;--line:#34295c;--acc:#b794ff;--accfg:#150d2e;--code:#0c0818;--codefg:#d8ccff;--warn:#f0b35a;--r:16px;--body:system-ui,-apple-system,Segoe UI,sans-serif;--head:system-ui,sans-serif}
+:root{--bg:#120d24;--fg:#ece8ff;--mut:#a79fd0;--card:#1c1536;--line:#34295c;--acc:#b794ff;--accfg:#150d2e;--code:#0c0818;--codefg:#d8ccff;--warn:#f0b35a;--arabic:'Readex Pro',sans-serif;--r:16px;--body:'Public Sans','Readex Pro',system-ui,sans-serif;--head:'Unbounded','Readex Pro',system-ui,sans-serif}
 header.hero{padding:80px 0 44px;text-align:center;background:radial-gradient(700px 320px at 50% 0,#4a2f9a66,transparent)}
 h1{font-size:3.2rem;margin:0 0 6px;background:linear-gradient(90deg,#b794ff,#6ee7ff);-webkit-background-clip:text;background-clip:text;color:transparent}.tag{font-size:1.2rem;color:var(--mut);max-width:620px;margin:0 auto 22px}
 main section h2{border-left:4px solid var(--acc);padding-left:12px}
+
+/* design tokens: motion */
+:root{--ease-spring:cubic-bezier(.22,1.36,.32,1);--ease-out:cubic-bezier(.16,1,.3,1);--dur-m:.55s;--dur-s:.8s}
+/* Arabic: real family, no letter-spacing, taller lines */
+[dir="rtl"],[lang="ar"]{font-family:var(--arabic);letter-spacing:0;line-height:1.75}
+/* one orchestrated entrance: staggered hero reveal */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero .wrap>*{animation:rise var(--dur-s) var(--ease-out) both}
+.hero .wrap>*:nth-child(1){animation-delay:.05s}.hero .wrap>*:nth-child(2){animation-delay:.15s}.hero .wrap>*:nth-child(3){animation-delay:.25s}.hero .wrap>*:nth-child(4){animation-delay:.34s}.hero .wrap>*:nth-child(5){animation-delay:.42s}
+/* micro-interactions */
+.btn{transition:transform .2s var(--ease-spring),box-shadow .2s var(--ease-out)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0) scale(.97)}
+.card{transition:border-color .25s var(--ease-out),transform .25s var(--ease-out)}
+.card:hover{border-color:var(--acc);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style></head><body>
 <header class="hero"><div class="wrap"><h1>TimeCapsule</h1><p class="tag">What was I working on? A private, searchable timeline of your files.</p>
 <a class="btn" href="https://github.com/mohamed-elshamy-ai/timecapsule">View on GitHub</a><a class="btn alt" href="#install">Install</a>
