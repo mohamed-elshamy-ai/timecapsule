@@ -1,6 +1,6 @@
 # TimeCapsule
 
-[![tests](https://github.com/mohamed-elshamy-ai/timecapsule/actions/workflows/tests.yml/badge.svg)](https://github.com/mohamed-elshamy-ai/timecapsule/actions/workflows/tests.yml) ![tests: 9 passing](https://img.shields.io/badge/tests-9%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+[![tests](https://github.com/mohamed-elshamy-ai/timecapsule/actions/workflows/tests.yml/badge.svg)](https://github.com/mohamed-elshamy-ai/timecapsule/actions/workflows/tests.yml) ![tests: 10 passing](https://img.shields.io/badge/tests-10%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 **What was I working on on October 12? When did I last edit that file?**
 
