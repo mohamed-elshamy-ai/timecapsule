@@ -1,6 +1,6 @@
 # TimeCapsule
 
-[![tests](https://github.com/Hamasa-ElShamy/timecapsule/actions/workflows/tests.yml/badge.svg)](https://github.com/Hamasa-ElShamy/timecapsule/actions/workflows/tests.yml) ![tests: 10 passing](https://img.shields.io/badge/tests-10%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+[![tests](https://github.com/hamasa-lshmn/timecapsule/actions/workflows/tests.yml/badge.svg)](https://github.com/hamasa-lshmn/timecapsule/actions/workflows/tests.yml) ![tests: 10 passing](https://img.shields.io/badge/tests-10%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 **What was I working on on October 12? When did I last edit that file?**
 
@@ -11,7 +11,7 @@ It is opt-in and local-first. Nothing is recorded until you add a folder. Only f
 ## Install and use
 
 ```bash
-git clone https://github.com/Hamasa-ElShamy/timecapsule
+git clone https://github.com/hamasa-lshmn/timecapsule
 cd timecapsule
 pip install -e .
 
@@ -50,12 +50,12 @@ Already excluded by default: `.git`, `node_modules`, `__pycache__`, virtual envs
 Needs Python 3.9 or newer. On Windows install it from python.org and tick "Add python.exe to PATH".
 
 ```bash
-# Windows (PowerShell):  py -m pip install git+https://github.com/Hamasa-ElShamy/timecapsule
-# macOS:                 python3 -m pip install git+https://github.com/Hamasa-ElShamy/timecapsule
-# Linux:                 python3 -m pip install --user git+https://github.com/Hamasa-ElShamy/timecapsule
+# Windows (PowerShell):  py -m pip install git+https://github.com/hamasa-lshmn/timecapsule
+# macOS:                 python3 -m pip install git+https://github.com/hamasa-lshmn/timecapsule
+# Linux:                 python3 -m pip install --user git+https://github.com/hamasa-lshmn/timecapsule
 ```
 
-Tested on Linux only (verified `pip install` from GitHub in a clean environment). Android and browser: not available, a website cannot watch your folders. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://hamasa-elshamy.github.io/timecapsule/
+Tested on Linux only (verified `pip install` from GitHub in a clean environment). Android and browser: not available, a website cannot watch your folders. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://hamasa-lshmn.github.io/timecapsule/
 
 ## How it works
 
