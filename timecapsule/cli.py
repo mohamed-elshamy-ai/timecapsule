@@ -1,7 +1,7 @@
 import argparse
 import os
 import sys
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 from . import __version__
 from .store import Capsule
@@ -42,12 +42,15 @@ def main(argv=None):
     s.add_argument("--before", help="YYYY-MM-DD"); s.add_argument("--path", help="delete events whose path contains this")
     s.add_argument("--everything", action="store_true"); s.add_argument("--yes", action="store_true", help="skip the confirmation")
     a = ap.parse_args(argv)
-    c = Capsule(a.db)
+    try: c = Capsule(a.db)
+    except ValueError as e:
+        print(f"timecapsule: {e}", file=sys.stderr); return 3
     try:
         if a.cmd == "add":
             f = c.add_folder(a.folder); c.scan(); print(f"Tracking {f}. Only file names, sizes and times are recorded, never contents.")
         elif a.cmd == "unwatch":
-            c.remove_folder(a.folder); print("No longer tracking it. Existing history is kept; use 'forget' to delete.")
+            if c.remove_folder(a.folder): print("No longer tracking it. Existing history is kept; use 'forget' to delete.")
+            else: print("That folder was not being tracked. Run 'timecapsule status' to see the tracked folders."); return 1
         elif a.cmd == "scan":
             print(f"{c.scan()} event(s) recorded")
         elif a.cmd == "watch":
@@ -57,7 +60,13 @@ def main(argv=None):
             except KeyboardInterrupt:
                 print("Stopped.")
         elif a.cmd == "day":
-            evs = c.day(a.date)
+            dd = a.date.lower()
+            if dd == "yesterday": dd = (date.today() - timedelta(days=1)).isoformat()
+            elif dd == "today": dd = date.today().isoformat()
+            try: datetime.strptime(dd, "%Y-%m-%d")
+            except ValueError:
+                print(f"timecapsule: '{a.date}' is not a date. Use YYYY-MM-DD (for example 2026-10-12), 'today' or 'yesterday'.", file=sys.stderr); return 3
+            evs = c.day(dd)
             show_events(evs) if evs else print("Nothing recorded for that day.")
         elif a.cmd == "last":
             evs = c.last(a.name)
@@ -89,10 +98,12 @@ def main(argv=None):
                 print("Say what to forget: --before DATE, --path TEXT or --everything"); return 3
             if not a.yes and input("Delete this history permanently? [y/N] ").lower() != "y":
                 print("Cancelled."); return 1
-            before = datetime.strptime(a.before, "%Y-%m-%d").timestamp() if a.before else None
+            try: before = datetime.strptime(a.before, "%Y-%m-%d").timestamp() if a.before else None
+            except ValueError:
+                print(f"timecapsule: '{a.before}' is not a date. Use YYYY-MM-DD.", file=sys.stderr); return 3
             print(f"Deleted {c.forget(before, a.path, a.everything)} event(s).")
     except (FileNotFoundError, ValueError) as e:
-        print(f"error: {e}", file=sys.stderr); return 3
+        print(f"timecapsule: {e}", file=sys.stderr); return 3
     return 0
 
 

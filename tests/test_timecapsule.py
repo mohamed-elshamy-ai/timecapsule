@@ -118,3 +118,11 @@ def test_cli(tmp_path, capsys):
     assert main(["--db", db, "forget", "--everything", "--yes"]) == 0
     assert main(["--db", db, "last", "notes"]) == 1
     assert main(["--db", db, "add", str(tmp_path / "nope")]) == 3
+
+
+def test_bad_inputs_give_clean_messages(tmp_path):
+    import subprocess, sys
+    db = str(tmp_path / "c.db"); f = tmp_path / "file.txt"; f.write_text("x")
+    for args in (["add", str(tmp_path / "nope")], ["add", str(f)], ["day", "notadate"]):
+        r = subprocess.run([sys.executable, "-m", "timecapsule.cli", "--db", db, *args], capture_output=True, text=True)
+        assert r.returncode == 3 and "Traceback" not in r.stderr and "timecapsule:" in r.stderr

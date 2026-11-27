@@ -25,8 +25,10 @@ def default_db():
 class Capsule:
     def __init__(self, path=None):
         self.path = path or default_db()
-        Path(self.path).parent.mkdir(parents=True, exist_ok=True)
-        self.db = sqlite3.connect(self.path)
+        try: Path(self.path).parent.mkdir(parents=True, exist_ok=True)
+        except OSError as e: raise ValueError(f"cannot create the database folder for {self.path}: {e.strerror or e}")
+        try: self.db = sqlite3.connect(self.path)
+        except sqlite3.Error as e: raise ValueError(f"cannot open the database {self.path}: {e}")
         self.db.executescript("""
             CREATE TABLE IF NOT EXISTS folders(path TEXT PRIMARY KEY);
             CREATE TABLE IF NOT EXISTS excludes(pattern TEXT PRIMARY KEY);
@@ -42,15 +44,18 @@ class Capsule:
     # ---- settings ----
     def add_folder(self, folder):
         folder = str(Path(folder).expanduser().resolve())
+        if not os.path.exists(folder):
+            raise ValueError(f"that folder does not exist: {folder}")
         if not os.path.isdir(folder):
-            raise FileNotFoundError(folder)
+            raise ValueError(f"that is a file, not a folder: {folder}. Give timecapsule the folder that contains your work.")
         self.db.execute("INSERT OR IGNORE INTO folders VALUES (?)", (folder,))
         self.db.commit()
         return folder
 
     def remove_folder(self, folder):
-        self.db.execute("DELETE FROM folders WHERE path=?", (str(Path(folder).expanduser().resolve()),))
+        cur = self.db.execute("DELETE FROM folders WHERE path=?", (str(Path(folder).expanduser().resolve()),))
         self.db.commit()
+        return cur.rowcount
 
     def folders(self):
         return [r[0] for r in self.db.execute("SELECT path FROM folders ORDER BY path")]
@@ -154,8 +159,8 @@ class Capsule:
 
     def last(self, name):
         """Most recent events for files whose path contains `name`."""
-        return self.db.execute("SELECT ts, kind, path, size FROM events WHERE lower(path) LIKE ? ORDER BY ts DESC LIMIT 5",
-                               (f"%{name.lower()}%",)).fetchall()
+        return self.db.execute("SELECT ts, kind, path, size FROM events WHERE lower(path) LIKE ? ESCAPE '\\' ORDER BY ts DESC LIMIT 5",
+                               ("%" + name.lower().replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%",)).fetchall()
 
     def around(self, text, window_hours=2.0, max_windows=5):
         """Find files whose names match `text`, then list what else you worked on in the same time window."""
